@@ -15,17 +15,6 @@ class URLCol(Col):
         return element('a', {'href': url, 'id': id}, content=text)
 
 
-class ListCol(Col):
-    def __init__(self, name, id_attr, **kwargs):
-        self.id_attr = id_attr
-        super(ListCol, self).__init__(name, **kwargs)
-
-    def td_contents(self, item, attr_list):
-        text = self.from_attr_list(item, attr_list)
-        id = self.from_attr_list(item, [self.id_attr])
-        return element('li', {'id': id}, content=text)
-
-
 class QueryTable(Table):
     classes = ['table', 'table-hover']
     thead_classes = ['thead-light']
