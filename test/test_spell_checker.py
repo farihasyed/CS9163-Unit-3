@@ -206,7 +206,6 @@ def test_query_after_log_in(client):
     assert b'Query 1' in response.data
     assert ('User: ' + usernames[0]).encode() in response.data
     assert 'Input text: hello i am the admin'.encode() in response.data
-    assert 'The following 0 words were misspelled:'.encode() in response.data
 
     login(client, username=usernames[1], password=passwords[1], phone=phones[1])
     response = client.get('/history/query4', follow_redirects=True)
@@ -214,7 +213,6 @@ def test_query_after_log_in(client):
     assert b'Query 4' in response.data
     assert ('User: ' + usernames[1]).encode() in response.data
     assert 'Input text: hello wrold!'.encode() in response.data
-    assert b'The following 1 words were misspelled' in response.data
     assert b'wrold' in response.data
 
 
@@ -259,7 +257,6 @@ def test_user_query_get_after_log_in(client):
     assert b'Query 3' in response.data
     assert ('User: ' + usernames[1]).encode() in response.data
     assert 'Input text: testing as myself so admin can look at my queries'.encode() in response.data
-    assert b'The following 2 words were misspelled' in response.data
     assert b'qu' in response.data
     assert b'eries' in response.data
 
@@ -282,7 +279,6 @@ def test_spell_check_post(client):
     assert b'Enter text to be spell checked.' in response.data
     assert ('You are logged in as ' + usernames[1] + '.').encode() in response.data
     assert ('Input text: ' + input).encode() in response.data
-    assert b'The following 3 words were misspelled:' in response.data
     assert b'sogn' in response.data
     assert b'skyn' in response.data
     assert b'betta' in response.data
@@ -294,7 +290,6 @@ def test_spell_check_post(client):
     assert b'Enter text to be spell checked.' in response.data
     assert ('You are logged in as ' + usernames[1] + '.').encode() in response.data
     assert b'Input text: &amp;lt;&amp;gt;!@#$%!@#$' in response.data
-    assert b'The following 1 words were misspelled:' in response.data
     assert b'lt;&amp;gt' in response.data
 
     #invalid input
