@@ -8,6 +8,7 @@
 </head>
     <body>
         <div id="queryid"><h1>Query {{ query_id }}</h1></div>
+        Click <a href="{{ url_for('history') }}">here</a> to return to query list.
         <div id="userid">User: {{ username }} </div>
         <div id="querytext">{{ query_text }}</div>
         <div id="queryresults">{{ query_result }}</div>

@@ -8,6 +8,9 @@
 </head>
     <body>
         <h1>Login History</h1>
+        <form name="logout" id="logout" action="/logout" method="POST">
+            {{ form.logout }}
+        </form>
         <form name="login_history" id="login_history" action="/login_history" method="POST">
             {{ form.csrf_token }}
             {{ form.userid.label}} {{ form.userid }}

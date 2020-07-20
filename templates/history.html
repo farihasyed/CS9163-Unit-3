@@ -9,6 +9,9 @@
     <body>
         <h1>Query History</h1>
         <div id=numqueries><h3>{{ num_queries }} queries for {{ username }}</h3></div>
+        <form name="logout" id="logout" action="/logout" method="POST">
+            {{ form.logout }}
+        </form>
         {% if admin %}
             <form name="query" id="query" action="/history" method="POST">
                 {{ form.csrf_token }}

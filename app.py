@@ -79,21 +79,21 @@ def logout():
 @login_required
 def history():
     if check_user():
+        form = QueryHistory()
         username = session.get('user')['username']
         if check_admin():
             admin = True
-            form = QueryHistory()
             table, num_queries = get_queries(username)
             if form.validate_on_submit():
                 username = form.userquery.data
                 table, num_queries = get_queries(username, admin)
             response = make_response(render_template('history.html', table=table, num_queries=num_queries, form=form,
                                                      username=username, admin=admin))
-        elif request.method == 'GET':
-            print("in elif")
-            table, num_queries = get_queries(username)
-            response = make_response(render_template('history.html', table=table, num_queries=num_queries,
-                                                     username=username))
+        else:
+            if request.method == 'GET':
+                table, num_queries = get_queries(username)
+                response = make_response(render_template('history.html', table=table, num_queries=num_queries,
+                                                     username=username, form=form))
         response = headers(response)
         return response
     return redirect(url_for('login'))

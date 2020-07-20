@@ -52,8 +52,10 @@ class SpellCheck(FlaskForm):
 class QueryHistory(FlaskForm):
     userquery = StringField('Username: ', validators=USERNAME_VALIDATORS)
     submit = SubmitField()
+    logout = SubmitField()
 
 
 class LoginHistory(FlaskForm):
     userid = StringField('Username: ', validators=USERNAME_VALIDATORS)
     submit = SubmitField()
+    logout = SubmitField()
