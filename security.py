@@ -42,7 +42,6 @@ def headers(response):
 
 def check_user():
     user = session.get('user')
-    print(user)
     if user is not None:
         expected_session_token, expected_remote_address = get_token_and_address(user)
         return user['remote address'] == expected_remote_address and \
