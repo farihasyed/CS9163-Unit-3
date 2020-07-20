@@ -95,9 +95,12 @@ def get_token_and_address(user):
             cursor.execute("SELECT session_token, remote_address FROM sessions WHERE username = ?",
                            [user['username']])
             rows = cursor.fetchall()
+            session_token = None
+            remote_address = None
             if rows is not None and len(rows) != 0:
-                return rows[len(rows) - 1][0], rows[len(rows) - 1][1]
-            return None, None
+                session_token = rows[len(rows) - 1][0]
+                remote_address = rows[len(rows) - 1][1]
+            return session_token, remote_address
     except Error as e:
         error_handling(e)
     finally:
@@ -180,7 +183,8 @@ def hash_password(password):
     peppered_password = password + pepper
     password_hash = hashlib.pbkdf2_hmac(hash_name, peppered_password.encode('utf-8'), salt, ITERATIONS)
     password_hash = binascii.hexlify(password_hash)
-    hashed_password = (salt + password_hash).decode('ascii')
+    salted_and_peppered_password_hash = salt + password_hash
+    hashed_password = salted_and_peppered_password_hash.decode('ascii')
     return hashed_password, hash_name, salt
 
 
@@ -189,7 +193,8 @@ def verify_password(password_db, password, hash_name, salt):
         peppered_password = password + pepper
         password_hash = hashlib.pbkdf2_hmac(hash_name, peppered_password.encode('utf-8'), salt, ITERATIONS)
         password_hash = binascii.hexlify(password_hash)
-        password_hash = (salt + password_hash).decode('ascii')
+        salted_and_peppered_password_hash = salt + password_hash
+        password_hash = salted_and_peppered_password_hash.decode('ascii')
         if password_db == password_hash:
             return True
     return False
@@ -265,10 +270,10 @@ def get_query(username, id):
         with connection:
             cursor.execute("SELECT * FROM queries WHERE username = ? AND query_id = ?", [username, id])
             row = cursor.fetchone()
+            query_id, username, query_text, query_result = None, None, None, None
             if row is not None:
                 query_id, username, query_text, query_result = row[0], row[1], row[2], row[3]
-                return query_id, username, query_text, query_result
-            return None, None, None, None
+            return query_id, username, query_text, query_result
     except Error as e:
         error_handling(e)
     finally:
