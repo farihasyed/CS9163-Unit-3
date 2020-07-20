@@ -19,8 +19,8 @@
                 {% for message in messages %}
                     <li id="login{{ message[3] }}">Event {{ message[0] }}</li>
                         <ul>
-                            <li id="login{{ message[4] }}_time">{{ message[1] }}</li>
-                            <li id="logout{{ message[5] }}_time">{{ message[2] }}</li>
+                            <li id="login{{ message[4] }}_time">Login: {{ message[1] }}</li>
+                            <li id="logout{{ message[5] }}_time">Logout: {{ message[2] }}</li>
                         </ul>
                 {% endfor %}
                 </ul>

@@ -42,6 +42,7 @@ def headers(response):
 
 def check_user():
     user = session.get('user')
+    print(user)
     if user is not None:
         expected_session_token, expected_remote_address = get_token_and_address(user)
         return user['remote address'] == expected_remote_address and \
@@ -64,16 +65,19 @@ def check_referrer():
 
 
 def check_origin():
-    user = session['user']
-    expected_session_token, expected_remote_address = get_token_and_address(user)
-    origin = request.origin
-    return origin is None or str(origin).find(expected_remote_address) != -1
+    user = session.get('user')
+    if user is not None:
+        expected_session_token, expected_remote_address = get_token_and_address(user)
+        origin = request.origin
+        return origin is None or str(origin).find(expected_remote_address) != -1
+    return False
 
 
 def check_admin():
     user = session.get('user')
-    expected_session_token, expected_remote_address = get_token_and_address(user)
     if user is not None:
+        expected_session_token, expected_remote_address = get_token_and_address(user)
         return user['username'] == ADMIN_USERNAME and user['session_token'] == expected_session_token \
                and user['remote address'] == expected_remote_address
+    return False
 

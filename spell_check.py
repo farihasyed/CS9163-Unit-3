@@ -15,15 +15,10 @@ def verify_login(username, password, phone):
 
 
 def register_with_user_info(username, password, phone):
-    failure = "Registration failed. Please try again."
     registration_result = register_db(username, password, phone)
     if registration_result:
         success = 'Success! You have been registered.'
         flash(success, 'success')
-        return redirect(url_for('register'))
-    elif registration_result == 'username taken':
-        failure = 'Username already taken. Please choose another one.'
-    flash(failure, 'failure')
     return redirect(url_for('register'))
 
 

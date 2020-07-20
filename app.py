@@ -89,7 +89,8 @@ def history():
                 table, num_queries = get_queries(username, admin)
             response = make_response(render_template('history.html', table=table, num_queries=num_queries, form=form,
                                                      username=username, admin=admin))
-        elif check_user() and request.method == 'GET':
+        elif request.method == 'GET':
+            print("in elif")
             table, num_queries = get_queries(username)
             response = make_response(render_template('history.html', table=table, num_queries=num_queries,
                                                      username=username))

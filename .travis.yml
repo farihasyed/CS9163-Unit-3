@@ -1,0 +1,14 @@
+language: python
+python: 3.7
+before_install:
+  - python setup.py install
+  - export SECRET_KEY=WBm2eWYflE
+  - export DATABASE_NAME=SpellCheck.db
+  - export ADMIN_USERNAME=admin
+  - export ADMIN_PASSWORD=Administrator@1
+  - export ADMIN_PHONE=12345678901
+  - export KEY=N12nf_OFlcaF80cIdUwoYIAGxykW4JhF5kTXu3TNa8U
+install:
+  - pip install tox
+script:
+  - tox
