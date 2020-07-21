@@ -1,3 +1,4 @@
+import flask_wtf
 from flask import Flask, render_template, request, url_for, redirect, session, make_response
 from flask_wtf import CSRFProtect
 from .forms import Registration, Login, SpellCheck, LoginHistory, QueryHistory
