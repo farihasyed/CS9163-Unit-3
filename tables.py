@@ -1,3 +1,4 @@
+import flask_table
 from flask_table import Table, Col
 from flask_table.html import element
 
