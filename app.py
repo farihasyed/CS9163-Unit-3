@@ -34,7 +34,7 @@ def start():
 def login():
     form = Login()
     if check_referrer() and form.validate_on_submit():
-        username, password, phone = form.uname.data, form.pword.data, form.phone.data
+        username, password, phone = form.username.data, form.password.data, form.phone.data
         return verify_login(username, password, phone)
     response = make_response(render_template('login.html', form=form))
     response = headers(response)
@@ -45,7 +45,7 @@ def login():
 def register():
     form = Registration()
     if check_referrer() and form.validate_on_submit():
-        username, password, phone = form.uname.data, form.pword.data, form.phone.data
+        username, password, phone = form.username.data, form.password.data, form.phone.data
         return register_with_user_info(username, password, phone)
     response = make_response(render_template('register.html', form=form))
     response = headers(response)
@@ -58,7 +58,7 @@ def spell_check():
     form = SpellCheck()
     if check_user() and form.validate_on_submit():
         file_path = "text/samples/file.txt"
-        return spell_check_user_input(form.inputtext.data, file_path)
+        return spell_check_user_input(form.input.data, file_path)
     response = make_response(render_template('spell_check.html', user=session['user']['username'], form=form))
     response = headers(response)
     return response
@@ -85,7 +85,7 @@ def history():
             admin = True
             table, num_queries = get_queries(username)
             if form.validate_on_submit():
-                username = form.userquery.data
+                username = form.username.data
                 table, num_queries = get_queries(username, admin)
             response = make_response(render_template('history.html', table=table, num_queries=num_queries, form=form,
                                                      username=username, admin=admin))
@@ -129,7 +129,7 @@ def user_query_history(username, id):
 def login_history():
     form = LoginHistory()
     if check_admin() and form.validate_on_submit():
-        username = form.userid.data
+        username = form.username.data
         return get_logs(username)
     response = make_response(render_template('login_history.html', form=form))
     response = headers(response)

@@ -18,12 +18,12 @@
         <form id="inputtext" action="/spell_check" method="POST">
             {{ form.csrf_token }}
             
-            {% if form.inputtext.errors %}
-                {% for error in form.inputtext.errors %}
+            {% if form.input.errors %}
+                {% for error in form.input.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            {{ form.inputtext(rows='10', cols='50') }}<p/>
+            {{ form.input(rows='10', cols='50') }}<p/>
             {{ form.submit }}
         </form>
 

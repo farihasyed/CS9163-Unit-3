@@ -13,7 +13,7 @@
         </form>
         <form name="login_history" id="login_history" action="/login_history" method="POST">
             {{ form.csrf_token }}
-            {{ form.userid.label}} {{ form.userid }}
+            {{ form.username.label}} {{ form.username }}
             {{ form.submit }}
         </form>
         {% with messages = get_flashed_messages() %}

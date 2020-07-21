@@ -15,7 +15,7 @@
         {% if admin %}
             <form name="query" id="query" action="/history" method="POST">
                 {{ form.csrf_token }}
-                {{ form.userquery.label}} {{ form.userquery }}
+                {{ form.username.label}} {{ form.username }}
                 {{ form.submit }}
             </form>
         {% endif %}

@@ -64,11 +64,14 @@ def check_referrer():
 
 
 def check_origin():
+    origin = None
     user = session.get('user')
     if user is not None:
-        expected_session_token, expected_remote_address = get_token_and_address(user)
-        origin = request.origin
-        return origin is None or str(origin).find(expected_remote_address) != -1
+        if request is not None and len(request.data) != 0 and request.data.find('origin') != -1:
+            origin = request.origin
+            expected_session_token, expected_remote_address = get_token_and_address(user)
+            return str(origin).find(expected_remote_address) != -1
+        return origin is None
     return False
 
 

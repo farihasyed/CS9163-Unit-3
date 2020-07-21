@@ -28,26 +28,26 @@
         <form name="login" id="login" action="/login" method="POST">
             {{ form.csrf_token }}
 
-            {% if form.uname.errors %}
-                {% for error in form.uname.errors %}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            {{ form.uname.label }} {{ form.uname }}<p/>
+            {{ form.username.label }} {{ form.username }}<p/>
             
-            {% if form.pword.errors %}
-                {% for error in form.pword.errors %}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            {{ form.pword.label }} {{ form.pword }}
+            {{ form.password.label }} {{ form.password }}
 
             {% if form.phone.errors %}
                 {% for error in form.phone.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            <div id="2fa" name="2fa">{{ form.phone.label }} {{ form.phone }}</div>
+            {{ form.phone.label }} {{ form.phone }}
             {{ form.sign_in }}
         </form>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

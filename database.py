@@ -41,7 +41,7 @@ def create_database():
         connection, cursor = get_connection()
         with connection:
             cursor.execute("""CREATE TABLE IF NOT EXISTS credentials (
-                            username TEXT NOT NULL PRIMARY KEY UNIQUE, 
+                            username VARCHAR(32) NOT NULL PRIMARY KEY UNIQUE, 
                             password TEXT NOT NULL, 
                             phone TEXT)
                             """)
@@ -53,23 +53,23 @@ def create_database():
                             """)
             cursor.execute("""CREATE TABLE IF NOT EXISTS queries (
                             query_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            username TEXT NOT NULL, 
+                            username VARCHAR(32) NOT NULL, 
                             input VARCHAR(128), 
                             output VARCHAR(128),
                             FOREIGN KEY (username) REFERENCES credentials (username))
                             """)
             cursor.execute("""CREATE TABLE IF NOT EXISTS logs (
                             event_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            username TEXT NOT NULL, 
-                            login TEXT,
-                            logout TEXT,
+                            username VARCHAR(32) NOT NULL, 
+                            login VARCHAR(10),
+                            logout VARCHAR(10),
                             FOREIGN KEY (username) REFERENCES credentials (username))
                             """)
             cursor.execute("""CREATE TABLE IF NOT EXISTS sessions (
-                            username TEXT NOT NULL, 
+                            username VARCHAR(32) NOT NULL, 
                             session_token TEXT NOT NULL,
-                            remote_address TEXT NOT NULL,
-                            login TEXT NOT NULL,
+                            remote_address VARCHAR(12) NOT NULL,
+                            login VARCHAR(10) NOT NULL,
                             FOREIGN KEY (username) REFERENCES credentials (username))
                             """)
             hashed_password, hash_name, salt = hash_password(ADMIN_PASSWORD)

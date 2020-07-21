@@ -20,25 +20,25 @@ def client():
 
 
 def register(client, username, password, phone=''):
-    return client.post('/register', data={'uname': username, 'pword': password, 'phone': phone},
+    return client.post('/register', data={'username': username, 'password': password, 'phone': phone},
                        follow_redirects=True)
 
 
 def login(client, username, password='', phone=''):
-    return client.post('/login', data={'uname': username, 'pword': password, 'phone': phone},
+    return client.post('/login', data={'username': username, 'password': password, 'phone': phone},
                        follow_redirects=True)
 
 
 def spell_check(client, input):
-    return client.post('/spell_check', data={'inputtext': input}, follow_redirects=True)
+    return client.post('/spell_check', data={'input': input}, follow_redirects=True)
 
 
 def login_history(client, username):
-    return client.post('/login_history', data={'userid': username}, follow_redirects=True)
+    return client.post('/login_history', data={'username': username}, follow_redirects=True)
 
 
 def user_query(client, username):
-    return client.post('/history', data={'userquery': username}, follow_redirects=True)
+    return client.post('/history', data={'username': username}, follow_redirects=True)
 
 
 def logout(client):

@@ -30,21 +30,21 @@
         <form name="register" id="register" action="/register" method="POST">
             {{ form.csrf_token }}
             
-            {% if form.uname.errors %}
+            {% if form.username.errors %}
                 Invalid username.
-                {% for error in form.uname.errors %}
+                {% for error in form.username.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            {{ form.uname.label }} {{ form.uname }}<p/>
+            {{ form.username.label }} {{ form.username }}<p/>
             
-            {% if form.pword.errors %}
+            {% if form.password.errors %}
                 Invalid password.
-                {% for error in form.pword.errors %}
+                {% for error in form.password.errors %}
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            {{ form.pword.label }} {{ form.pword }}
+            {{ form.password.label }} {{ form.password }}
             
             {% if form.phone.errors %}
                 Invalid phone number.
@@ -52,7 +52,7 @@
                     {{ error }}
                 {% endfor %}
             {% endif %}
-            <div id="2fa" name="2fa">{{ form.phone.label }} {{ form.phone }}</div>
+            {{ form.phone.label }} {{ form.phone }}
             {{ form.register }}
         </form>
         
